@@ -21,7 +21,7 @@ jobs:
       run: npm install
 
     - name: Make 'folio' executable
-      run: chmod +x node_modules\folio
+      run: chmod +x /node_modules/folio
 
     - name: Run Playwright
       run: npx folio
