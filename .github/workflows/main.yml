@@ -21,7 +21,7 @@ jobs:
         run: npm install
 
       - name: Make script executable
-        run: chmod +x lottoBot.spec.mjs
+        run: chmod +x lottoBot.spec.js
 
       - name: Run Playwright Tests
         run: npx playwright test
