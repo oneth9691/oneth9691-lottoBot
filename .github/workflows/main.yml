@@ -20,5 +20,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Make 'folio' executable
+      run: chmod +x folio
+
     - name: Run Playwright
-      run: npx folio # npx folio를 사용하여 Playwright Test 실행
+      run: npx folio
