@@ -1,27 +1,26 @@
-name: Playwright Tests
+name: Run Playwright every Saturday at 10 AM
+
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+  schedule:
+    - cron: '*/1 * * * *' # 매일 1분마다 실행
+
 jobs:
-  test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
+  playwright:
+    runs-on: ubuntu-latest # 원하는 운영체제 선택
+
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
       with:
-        node-version: 18
+        node-version: 14 # 사용할 Node.js 버전 선택
+
     - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      run: npm install
+
+    - name: Run Playwright
+      run: npm run test.spec-script # Playwright 실행 스크립트의 이름으로 변경
+
+    # 필요한 추가 단계 (예: 결과 보고서 업로드)를 여기에 추가할 수 있습니다.
