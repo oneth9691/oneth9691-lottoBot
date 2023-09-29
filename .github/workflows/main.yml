@@ -15,16 +15,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14  # Node.js 버전을 적절한 버전으로 변경
+          node-version: 18  # Node.js 버전을 적절한 버전으로 변경
 
       - name: Install dependencies
         run: npm install
 
-      - name: Debug
-        run: |
-          pwd
-          ls -l
-          ls -l lottoBot.spec.js
+      # - name: Debug
+      #   run: |
+      #     pwd
+      #     ls -l
+      #     ls -l lottoBot.spec.js
 
       - name: Make script executable
         run: chmod +x lottoBot.spec.js
