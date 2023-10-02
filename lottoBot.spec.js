@@ -12,8 +12,7 @@ test('Send Slack Message', async ({page}) => {
   await page.getByPlaceholder('비밀번호').fill('KEYnumber00@@');
   await page.getByPlaceholder('비밀번호').press('Enter');
   await page.goto('https://www.dhlottery.co.kr/userSsl.do?method=myPage');
-
-
+  await page.waitForSelector('h3.sub_title');
   const element = await page.$('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
   const originalText = await element.textContent();
   var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
