@@ -31,26 +31,27 @@ test('Send Slack Message', async ({page}) => {
   const imagePath = 'LOTTO_' + formattedDate + '.png';
 
 
-  await page.goto('https://imgur.com/upload');
-  await page.getByText('Choose Photo/Video').click();
-  await page.getByLabel('Choose Photo/Video').setInputFiles('LOTTO_20231002.png');
+  await page.goto('https://postimages.org/');
+  await page.locator('#expire').selectOption('1');
+  await page.getByText('Choose images').click();
+  // 파일 업로드 input 엘리먼트를 찾습니다.
+  const fileInput = await page.$('input[type=file]');
+  await fileInput.setInputFiles(imagePath);
   // "Upload Complete!" 텍스트가 포함된 div 엘리먼트가 나타날 때까지 대기
-  await page.waitForSelector('div:has-text("Upload Complete!")');
-  // "Upload Complete!" 텍스트를 포함한 div 엘리먼트가 나타났으므로 "Grab Link" 버튼 클릭
-  await page.getByRole('button', { name: 'Grab Link' }).click();
+  await page.waitForSelector('#code_direct');
   // 텍스트 상자 (textbox) 엘리먼트를 찾음
-  const textboxElement = await page.getByRole('textbox');
+// input 요소의 value 속성 값을 가져옵니다.
+  const value = await page.$eval('#code_direct', (inputElement) => inputElement.value);
   // 텍스트 상자의 값을 가져와 변수에 저장
-  const textboxValue = await textboxElement.inputValue();
   // 이제 "copiedLink" 변수에 복사된 링크가 저장되어 있음
-  console.log(textboxValue);
+  console.log(value);
 
   const message = {
     text: '안녕하세요, Slack 웹훅을 통해 메시지를 보냅니다!뀨',
     attachments: [
       {
           fallback: "이미지",
-          image_url: textboxValue,
+          image_url: value,
       }
   ]
   };
