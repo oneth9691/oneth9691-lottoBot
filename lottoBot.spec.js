@@ -1,5 +1,5 @@
-const { test, expect} = require('@playwright/test');
-const axios = require('axios');
+import { test, expect } from '@playwright/test';
+import axios from 'axios';
 // 다른 파일에서 서버 시작
 
 
