@@ -20,14 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Debug
-      #   run: |
-      #     pwd
-      #     ls -l
-      #     ls -l lottoBot.spec.js
-
       - name: Make script executable
         run: chmod +x lottoBot.spec.js
+
+      - name: Install Playwright and browsers
+        run: npx playwright install
 
       - name: Run Playwright Tests
         run: npx playwright test
