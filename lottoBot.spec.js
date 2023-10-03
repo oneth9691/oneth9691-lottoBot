@@ -18,25 +18,26 @@ test('Send Slack Message', async ({page}) => {
 
     await page.goto('https://www.dhlottery.co.kr/userSsl.do?method=myPage');
 
-    // 요소가 나타날 때까지 대기
-    await page.waitForSelector('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
+    // // 요소가 나타날 때까지 대기
+    // await page.waitForSelector('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
     
-    const element = await page.$('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
-    const originalText = await element.textContent();
-    var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
-    console.log(extractedNumbers); 
-    var formattedDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    console.log(formattedDate);
-    await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
+    // const element = await page.$('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
+    // const originalText = await element.textContent();
+    // var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
+    // console.log(extractedNumbers); 
+    // var formattedDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    // console.log(formattedDate);
+    // await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
     
-    const webhookUrl = 'https://hooks.slack.com/services/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';
+    // const webhookUrl = 'https://hooks.slack.com/services/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';
 
-    // id가 'popup645paper'인 요소를 찾아서 스크린샷 캡처
-    const elementId = 'popup645paper';
-    const elementHandle = await page.$(`#${elementId}`);
-    await elementHandle.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
-    const imagePath = 'LOTTO_' + formattedDate + '.png';
+    // // id가 'popup645paper'인 요소를 찾아서 스크린샷 캡처
+    // const elementId = 'popup645paper';
+    // const elementHandle = await page.$(`#${elementId}`);
+    // await elementHandle.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
+    // const imagePath = 'LOTTO_' + formattedDate + '.png';
 
+    const imagePath = 'LOTTO_20231002.png';
 
     await page.goto('https://postimages.org/');
     await page.locator('#expire').selectOption('1');
@@ -73,7 +74,7 @@ test('Send Slack Message', async ({page}) => {
       console.error('메시지 전송 중 오류 발생:', error);
       throw error; // 테스트를 실패로 처리
     });
-    
+
   } catch (error) {
     console.error('요소를 찾는 동안 오류 발생:', error);
     // 요소를 찾지 못한 경우에 대한 처리를 여기에 추가
