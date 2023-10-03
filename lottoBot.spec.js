@@ -17,7 +17,18 @@ test('Send Slack Message', async ({page}) => {
     });
 
     await page.goto('https://www.dhlottery.co.kr/userSsl.do?method=myPage');
-
+    await page.getByRole('link', { name: '자세히 보기' }).nth(1).click();
+    await page.getByRole('link', { name: '1주일' }).click();
+    await page.getByRole('link', { name: '조회', exact: true }).click();
+    const element = await page.$('div[title="클릭하시면 구매내용을 확인 할 수 있습니다."]');
+    await element.click();
+    // 새 창을 기다립니다.
+    const newPage = await page.waitForEvent('popup');
+    // 새 창에서 스크린샷을 찍습니다.
+    await newPage.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
+    // 새 창을 닫습니다.
+    await newPage.close();
+    
     // // 요소가 나타날 때까지 대기
     // await page.waitForSelector('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
     
@@ -29,15 +40,13 @@ test('Send Slack Message', async ({page}) => {
     // console.log(formattedDate);
     // await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
     
-    const webhookUrl = 'https://hooks.slack.com/services/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';
-
     // // id가 'popup645paper'인 요소를 찾아서 스크린샷 캡처
     // const elementId = 'popup645paper';
     // const elementHandle = await page.$(`#${elementId}`);
     // await elementHandle.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
     // const imagePath = 'LOTTO_' + formattedDate + '.png';
 
-    const imagePath = 'LOTTO_20231002.png';
+    const imagePath = 'LOTTO_' + formattedDate + '.png';
 
     await page.goto('https://postimages.org/');
     await page.locator('#expire').selectOption('1');
@@ -53,6 +62,8 @@ test('Send Slack Message', async ({page}) => {
     // 텍스트 상자의 값을 가져와 변수에 저장
     // 이제 "copiedLink" 변수에 복사된 링크가 저장되어 있음
     console.log(value);
+
+    const webhookUrl = 'https://hooks.slack.com/services/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';
 
     const message = {
       text: '안녕하세요, Slack 웹훅을 통해 메시지를 보냅니다!뀨',
