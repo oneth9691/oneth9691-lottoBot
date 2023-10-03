@@ -29,7 +29,7 @@ test('Send Slack Message', async ({page}) => {
     // console.log(formattedDate);
     // await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
     
-    // const webhookUrl = 'https://hooks.slack.com/services/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';
+    const webhookUrl = 'https://hooks.slack.com/services/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';
 
     // // id가 'popup645paper'인 요소를 찾아서 스크린샷 캡처
     // const elementId = 'popup645paper';
