@@ -20,38 +20,40 @@ test('Send Slack Message', async ({page}) => {
     page.on('console', (log) => {
       console.log(`Page Log: ${log.text()}`);
     });
-    // await page.getByRole('link', { name: '자세히 보기' }).nth(1).click();
-    // await page.getByRole('link', { name: '1주일' }).click();
-    // await page.getByRole('link', { name: '조회', exact: true }).click();
-    // const element = await page.$('div[title="클릭하시면 구매내용을 확인 할 수 있습니다."]');
-    // await element.click();
-    // // 새 창을 기다립니다.
-    // const newPage = await page.waitForEvent('popup');
-    // // 새 창에서 스크린샷을 찍습니다.
-    // await newPage.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
-    // // 새 창을 닫습니다.
-    // await newPage.close();
+    
+      // 페이지를 수직으로 300px 아래로 스크롤
+      await page.evaluate(() => {
+        window.scrollBy(0, 800);
+      });
+    await page.getByRole('link', { name: '자세히 보기' }).nth(1).click();
+    await page.getByRole('link', { name: '1주일' }).click();
+    await page.getByRole('link', { name: '조회', exact: true }).click();
+    const element = await page.$('div[title="클릭하시면 구매내용을 확인 할 수 있습니다."]');
+    await element.click();
+    // 새 창을 기다립니다.
+    const newPage = await page.waitForEvent('popup');
+    // 새 창에서 스크린샷을 찍습니다.
+    await newPage.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
+    // 새 창을 닫습니다.
+    await newPage.close();
     
     // // 요소가 나타날 때까지 대기
   
-    // 페이지를 수직으로 300px 아래로 스크롤
-    await page.evaluate(() => {
-      window.scrollBy(0, 800);
-    });
+
 
         
-    const element = await page.$('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
-    const originalText = await element.textContent();
-    var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
-    console.log(extractedNumbers); 
-    var formattedDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-    console.log(formattedDate);
-    await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
+    // const element = await page.$('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
+    // const originalText = await element.textContent();
+    // var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
+    // console.log(extractedNumbers); 
+    // var formattedDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    // console.log(formattedDate);
+    // await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
     
-    // id가 'popup645paper'인 요소를 찾아서 스크린샷 캡처
-    const elementId = 'popup645paper';
-    const elementHandle = await page.$(`#${elementId}`);
-    await elementHandle.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
+    // // id가 'popup645paper'인 요소를 찾아서 스크린샷 캡처
+    // const elementId = 'popup645paper';
+    // const elementHandle = await page.$(`#${elementId}`);
+    // await elementHandle.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
 
 
     const imagePath = 'LOTTO_' + formattedDate + '.png';
