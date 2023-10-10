@@ -16,14 +16,14 @@ test('Send Slack Message', async ({page}) => {
       console.log(`Page Log: ${log.text()}`);
     });
 
-    await page.goto('https://www.dhlottery.co.kr/userSsl.do?method=myPage');
+    await page.goto('https://dhlottery.co.kr/myPage.do?method=lottoBuyListView');
     page.on('console', (log) => {
       console.log(`Page Log: ${log.text()}`);
     });
-    
+
       // 페이지를 수직으로 300px 아래로 스크롤
       await page.evaluate(() => {
-        window.scrollBy(0, 800);
+        window.scrollBy(0, 300);
       });
     await page.getByRole('link', { name: '자세히 보기' }).nth(1).click();
     await page.getByRole('link', { name: '1주일' }).click();
