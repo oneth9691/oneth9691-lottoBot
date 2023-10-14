@@ -22,7 +22,7 @@ test('Send Slack Message', async ({page}) => {
     });
 
 
-    await page.waitForSelector('#popReceipt', {
+    await page.waitForSelector('div.box information', {
       visible: true,
       timeout: 1000,
     });
