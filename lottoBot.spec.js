@@ -44,7 +44,7 @@ test('Send Slack Message', async ({page}) => {
   //   // await newPage.close();
     
   //   // // 요소가 나타날 때까지 대기
-    const element = await page.$('#article > div:nth-child(2) > div > div:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
+    const element = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(4)');
     const originalText = await element.textContent();
     var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
     console.log(extractedNumbers); 
