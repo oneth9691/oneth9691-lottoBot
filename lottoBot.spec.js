@@ -16,20 +16,20 @@ test('Send Slack Message', async ({page}) => {
       console.log(`Page Log: ${log.text()}`);
     });
 
-    await page.goto('https://dhlottery.co.kr/myPage.do?method=lottoBuyListView');
+    await page.goto('https://www.dhlottery.co.kr/userSsl.do?method=myPage');
     page.on('console', (log) => {
       console.log(`Page Log: ${log.text()}`);
     });
 
-    await page.getByText('마이페이지 홈').click();
 
-  //   await page.waitForSelector('.box information', {
-  //     visible: true,
-  //     timeout:2000,
-  //   });
 
-    document.querySelector('.box information')?.remove();
-    document.querySelector('.box money')?.remove();
+    // Playwright로 요소를 제거
+    await page.evaluate(() => {
+      const elementToRemove = document.querySelector('.box_information');
+      if (elementToRemove) {
+        elementToRemove.remove();
+      }
+    });
 
   //   // await page.getByRole('link', { name: '자세히 보기' }).nth(1).click();
   //   // await page.getByRole('link', { name: '1주일' }).click();
@@ -44,60 +44,59 @@ test('Send Slack Message', async ({page}) => {
   //   // await newPage.close();
     
   //   // // 요소가 나타날 때까지 대기
-  
-  //   const element = await page.$('#article > div:nth-child(2) > div > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
-  //   const originalText = await element.textContent();
-  //   var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
-  //   console.log(extractedNumbers); 
-  //   var formattedDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-  //   console.log(formattedDate);
-  //   await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
+    const element = await page.$('#article > div:nth-child(2) > div > div:nth-child(1) > table > tbody > tr:nth-child(1) > td:nth-child(4)');
+    const originalText = await element.textContent();
+    var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
+    console.log(extractedNumbers); 
+    var formattedDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+    console.log(formattedDate);
+    await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
     
   //   // id가 'popup645paper'인 요소를 찾아서 스크린샷 캡처
-  //   const elementId = 'popup645paper';
-  //   const elementHandle = await page.$(`#${elementId}`);
-  //   await elementHandle.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
+    const elementId = 'popup645paper';
+    const elementHandle = await page.$(`#${elementId}`);
+    await elementHandle.screenshot({ path: 'LOTTO_' + formattedDate + '.png' });
 
 
-  //   const imagePath = 'LOTTO_' + formattedDate + '.png';
+    const imagePath = 'LOTTO_' + formattedDate + '.png';
 
-  //   await page.goto('https://postimages.org/');
-  //   await page.locator('#expire').selectOption('1');
-  //   await page.getByText('Choose images').click();
-  //   // 파일 업로드 input 엘리먼트를 찾습니다.
-  //   const fileInput = await page.$('input[type=file]');
-  //   await fileInput.setInputFiles(imagePath);
-  //   // "Upload Complete!" 텍스트가 포함된 div 엘리먼트가 나타날 때까지 대기
-  //   await page.waitForSelector('#code_direct');
-  //   // 텍스트 상자 (textbox) 엘리먼트를 찾음
-  // // input 요소의 value 속성 값을 가져옵니다.
-  //   const value = await page.$eval('#code_direct', (inputElement) => inputElement.value);
-  //   // 텍스트 상자의 값을 가져와 변수에 저장
-  //   // 이제 "copiedLink" 변수에 복사된 링크가 저장되어 있음
-  //   console.log(value);
+    await page.goto('https://postimages.org/');
+    await page.locator('#expire').selectOption('1');
+    await page.getByText('Choose images').click();
+    // 파일 업로드 input 엘리먼트를 찾습니다.
+    const fileInput = await page.$('input[type=file]');
+    await fileInput.setInputFiles(imagePath);
+    // "Upload Complete!" 텍스트가 포함된 div 엘리먼트가 나타날 때까지 대기
+    await page.waitForSelector('#code_direct');
+    // 텍스트 상자 (textbox) 엘리먼트를 찾음
+  // input 요소의 value 속성 값을 가져옵니다.
+    const value = await page.$eval('#code_direct', (inputElement) => inputElement.value);
+    // 텍스트 상자의 값을 가져와 변수에 저장
+    // 이제 "copiedLink" 변수에 복사된 링크가 저장되어 있음
+    console.log(value);
 
-  //   const webhookUrl = 'https://hooks.slack.com/services/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';
+    const webhookUrl = 'https://hooks.slack.com/services/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';
 
-  //   const message = {
-  //     text: '안녕하세요, Slack 웹훅을 통해 메시지를 보냅니다!뀨',
-  //     attachments: [
-  //       {
-  //           fallback: "이미지",
-  //           image_url: value,
-  //       }
-  //   ]
-  //   };
+    const message = {
+      text: '안녕하세요, Slack 웹훅을 통해 메시지를 보냅니다!뀨',
+      attachments: [
+        {
+            fallback: "이미지",
+            image_url: value,
+        }
+    ]
+    };
 
-  //   // Slack 웹훅에 POST 요청 보내기
-  //   await axios.post(webhookUrl, message)
-  //   .then((response) => {
-  //     console.log('메시지를 성공적으로 보냈습니다.');
-  //     expect(response.status).toBe(200); // Slack 웹훅 요청이 성공적으로 완료되었는지 확인
-  //   })
-  //   .catch((error) => {
-  //     console.error('메시지 전송 중 오류 발생:', error);
-  //     throw error; // 테스트를 실패로 처리
-  //   });
+    // Slack 웹훅에 POST 요청 보내기
+    await axios.post(webhookUrl, message)
+    .then((response) => {
+      console.log('메시지를 성공적으로 보냈습니다.');
+      expect(response.status).toBe(200); // Slack 웹훅 요청이 성공적으로 완료되었는지 확인
+    })
+    .catch((error) => {
+      console.error('메시지 전송 중 오류 발생:', error);
+      throw error; // 테스트를 실패로 처리
+    });
 
   } catch (error) {
     console.error('요소를 찾는 동안 오류 발생:', error);
