@@ -22,13 +22,13 @@ test('Send Slack Message', async ({page}) => {
     });
 
 
-    await page.waitForSelector('div.box information', {
+    await page.waitForSelector('.box information', {
       visible: true,
-      timeout: 1000,
+      timeout:2000,
     });
 
-    document.querySelector('div.box information')?.remove();
-    document.querySelector('div.box money')?.remove();
+    document.querySelector('.box information')?.remove();
+    document.querySelector('.box money')?.remove();
 
     // await page.getByRole('link', { name: '자세히 보기' }).nth(1).click();
     // await page.getByRole('link', { name: '1주일' }).click();
