@@ -21,6 +21,7 @@ test('Send Slack Message', async ({page}) => {
       console.log(`Page Log: ${log.text()}`);
     });
 
+    await page.getByText('마이페이지 홈').click();
 
   //   await page.waitForSelector('.box information', {
   //     visible: true,
