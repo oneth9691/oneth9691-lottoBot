@@ -11,15 +11,14 @@ test('Send Slack Message', async ({page}) => {
     await page.getByPlaceholder('아이디').press('Tab');
     await page.getByPlaceholder('비밀번호').fill('KEYnumber00@@');
     await page.getByPlaceholder('비밀번호').press('Enter');
-    // 페이지에서 로그 출력
-    page.on('console', (log) => {
-      console.log(`Page Log: ${log.text()}`);
-    });
+
 
     await page.goto('https://www.dhlottery.co.kr/userSsl.do?method=myPage');
-    page.on('console', (log) => {
-      console.log(`Page Log: ${log.text()}`);
-    });
+
+
+    const url = page.url();
+    console.log(`현재 페이지 주소: ${url}`);
+
 
 
 
