@@ -48,19 +48,12 @@ test('Send Slack Message', async ({page}) => {
     const element1 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(1)');
     const element2 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(2)');
     const element3 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(3)');
-    const element4 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(4)');
     const originalText1 = await element1.textContent();
-    var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
     const originalText2 = await element2.textContent();
-    var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
     const originalText3 = await element3.textContent();
-    var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
-    const originalText4 = await element4.textContent();
-    var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
     console.log("1"+originalText1); 
     console.log("1"+originalText2); 
-    console.log("1"+originalText3); 
-    console.log("1"+originalText4); 
+    console.log("1"+originalText3);
     const originalText = await element.textContent();
     var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
     console.log(extractedNumbers); 
