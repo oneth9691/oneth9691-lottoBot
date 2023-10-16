@@ -6,6 +6,11 @@ import axios from 'axios';
 test('Send Slack Message', async ({page}) => {
   try {
     await page.goto('https://dhlottery.co.kr/user.do?method=login&returnUrl=https%3A%2F%2Fwww.dhlottery.co.kr%2FuserSsl.do%3Fmethod%3DmyPage');
+
+    const url = page.url();
+    console.log(`현재 페이지 주소: ${url}`);
+
+
     await page.getByPlaceholder('아이디').click();
     await page.getByPlaceholder('아이디').fill('istth0901');
     await page.getByPlaceholder('아이디').press('Tab');
@@ -13,11 +18,11 @@ test('Send Slack Message', async ({page}) => {
     await page.getByPlaceholder('비밀번호').press('Enter');
 
 
-    await page.goto('https://www.dhlottery.co.kr/userSsl.do?method=myPage');
+    await page.goto('https://dhlottery.co.kr/userSsl.do?method=myPage');
 
 
-    const url = page.url();
-    console.log(`현재 페이지 주소: ${url}`);
+    const url2 = page.url();
+    console.log(`현재 페이지 주소: ${url2}`);
 
 
 
