@@ -44,7 +44,7 @@ test('Send Slack Message', async ({page}) => {
   //   // await newPage.close();
     
   //   // // 요소가 나타날 때까지 대기
-    const element = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(4)');
+    const element = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(3)');
     // const element1 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(1)');
     // const element2 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(2)');
     // const element3 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(3)');
