@@ -44,7 +44,7 @@ test('Send Slack Message', async ({page}) => {
   //   // await newPage.close();
     
   //   // // 요소가 나타날 때까지 대기
-    const element = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(3)');
+    const element = await page.$('table');
     // const element1 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(1)');
     // const element2 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(2)');
     // const element3 = await page.$('table > tbody > tr:nth-child(1) > td:nth-child(3)');
@@ -56,7 +56,7 @@ test('Send Slack Message', async ({page}) => {
     // console.log("1"+originalText3);
     const originalText = await element.textContent();
     var extractedNumbers = originalText.replace(/\s/g, ''); // 공백 문자(띄어쓰기)를 모두 제거
-    console.log(extractedNumbers); 
+    console.log(element);
     var formattedDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
     console.log(formattedDate);
     await page.goto('https://www.dhlottery.co.kr/myPage.do?method=lotto645Detail&orderNo='+formattedDate+'&barcode='+extractedNumbers+'&issueNo=1');
